@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-text">revit</span>
+                    <div class="logo-pulse"></div>
+                </div>
+                <span class="tagline">Reverse DNS Lookup Tool</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">Powerful <span class="text-gradient">Reverse DNS</span> Lookups</h1>
+                <p class="hero-subtitle">Fast, reliable DNS information for your IP addresses</p>
+                <div class="hero-actions">
+                    <button id="scrollToTool" class="btn btn-primary">Get Started <i class="fas fa-arrow-right"></i></button>
+                    <a href="#" class="btn btn-secondary" target="_blank">View on GitHub <i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="hero-bg">
+                <div class="hero-shape shape-1"></div>
+                <div class="hero-shape shape-2"></div>
+                <div class="hero-shape shape-3"></div>
+            </div>
+        </section>
+
+        <section id="dns-tool" class="dns-tool">
+            <div class="container">
+                <h2 class="section-title">Reverse DNS Lookup</h2>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="single">Single IP</button>
+                    <button class="tab-btn" data-tab="multiple">Multiple IPs</button>
+                    <button class="tab-btn" data-tab="file">File Upload</button>
+                    <div class="tab-slider"></div>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Single IP Tab -->
+                    <div id="single-tab" class="tab-pane active">
+                        <div class="input-group">
+                            <input type="text" id="single-ip" placeholder="Enter IP address (e.g. 8.8.8.8)" class="fancy-input">
+                            <button id="lookup-btn" class="btn btn-primary">
+                                <span>Lookup</span>
+                                <div class="btn-loader"></div>
+                            </button>
+                        </div>
+                        <div class="resolver-section">
+                            <div class="resolver-toggle">
+                                <label class="toggle">
+                                    <input type="checkbox" id="use-custom-resolver">
+                                    <span class="toggle-slider"></span>
+                                    <span class="toggle-label">Use custom resolver</span>
+                                </label>
+                            </div>
+                            <div id="resolver-input" class="input-group hidden">
+                                <input type="text" id="custom-resolver" placeholder="Enter resolver (e.g. 1.1.1.1)" class="fancy-input">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Multiple IPs Tab -->
+                    <div id="multiple-tab" class="tab-pane">
+                        <textarea id="multiple-ips" placeholder="Enter IP addresses (one per line)" class="fancy-input textarea"></textarea>
+                        <div class="control-group">
+                            <div class="input-group half">
+                                <label for="concurrency">Concurrency:</label>
+                                <input type="number" id="concurrency" min="1" max="100" value="10" class="fancy-input">
+                            </div>
+                            <div class="resolver-section half">
+                                <div class="resolver-toggle">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="use-custom-resolver-multi">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Use custom resolver</span>
+                                    </label>
+                                </div>
+                                <div id="resolver-input-multi" class="input-group hidden">
+                                    <input type="text" id="custom-resolver-multi" placeholder="Enter resolver (e.g. 1.1.1.1)" class="fancy-input">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="lookup-multi-btn" class="btn btn-primary">
+                            <span>Lookup All</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </div>
+                    
+                    <!-- File Upload Tab -->
+                    <div id="file-tab" class="tab-pane">
+                        <div class="file-upload">
+                            <input type="file" id="ip-file" class="file-input">
+                            <label for="ip-file" class="file-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span class="file-text">Choose a file or drag it here</span>
+                            </label>
+                            <p class="file-info">Upload a text file with IP addresses (one per line)</p>
+                        </div>
+                        <div class="control-group">
+                            <div class="input-group half">
+                                <label for="concurrency-file">Concurrency:</label>
+                                <input type="number" id="concurrency-file" min="1" max="100" value="10" class="fancy-input">
+                            </div>
+                            <div class="resolver-section half">
+                                <div class="resolver-toggle">
+                                    <label class="toggle">
+                                        <input type="checkbox" id="use-custom-resolver-file">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Use custom resolver</span>
+                                    </label>
+                                </div>
+                                <div id="resolver-input-file" class="input-group hidden">
+                                    <input type="text" id="custom-resolver-file" placeholder="Enter resolver (e.g. 1.1.1.1)" class="fancy-input">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="lookup-file-btn" class="btn btn-primary">
+                            <span>Process File</span>
+                            <div class="btn-loader"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="results-container" class="results-container hidden">
+                    <div class="results-header">
+                        <h3>Results</h3>
+                        <div class="results-actions">
+                            <button id="copy-results" class="btn btn-icon" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button id="download-results" class="btn btn-icon" title="Download results">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button id="clear-results" class="btn btn-icon" title="Clear results">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="results-content" class="results-content"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Revit</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Revit is a powerful reverse DNS lookup utility that allows you to quickly discover domain names associated with IP addresses.</p>
+                        <p>Originally developed as a command-line tool, Revit now offers this intuitive web interface for performing lookups directly from your browser.</p>
+                        <h3>Features</h3>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Single and batch IP lookups</li>
+                            <li><i class="fas fa-check"></i> File upload support</li>
+                            <li><i class="fas fa-check"></i> Custom DNS resolvers</li>
+                            <li><i class="fas fa-check"></i> Adjustable concurrency</li>
+                            <li><i class="fas fa-check"></i> Command-line interface</li>
+                        </ul>
+                    </div>
+                    <div class="code-example">
+                        <div class="code-header">
+                            <span class="code-title">Command-line usage:</span>
+                            <div class="code-controls">
+                                <span class="code-dot red"></span>
+                                <span class="code-dot yellow"></span>
+                                <span class="code-dot green"></span>
+                            </div>
+                        </div>
+                        <pre class="code-block"><code>$ revit -i "8.8.8.8"
+$ revit -l ip_list.txt
+$ cat ip_list.txt | revit
+$ revit -c 20 -r 1.1.1.1 -l ips.txt</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">revit</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#" target="_blank"><i class="fas fa-bug"></i> Report Issues</a>
+                    <a href="#" target="_blank"><i class="fas fa-gavel"></i> License</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 REVIT. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
