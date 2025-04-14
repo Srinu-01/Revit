@@ -21,31 +21,30 @@
 To install revit, run the following command:
 
 ```sh
-go install github.com/revit/cmd/revit@latest```
+go install github.com/revit/cmd/revit@latest
 ```
+
 Alternatively, you can clone the repository and build it yourself:
-Alternatively, you can clone the repository and build it yourself:
+
 ```sh
-```shlone https://github.com/devanshbatham/revit.git
-git clone https://github.com/revit/revit.git
-cd revit -o revit ./cmd/revit
+git clone https://github.com/devanshbatham/revit.git
+cd revit
 go build -o revit ./cmd/revit
 ```
-# Features
+
 # Features
 - 🚀 **Fast and Concurrent**: Perform multiple DNS lookups simultaneously
-- 🚀 **Fast and Concurrent**: Perform multiple DNS lookups simultaneouslypiped input
 - 🔄 **Flexible Input**: Accept IP addresses via command line, files, or piped input
-- 🎯 **Custom Resolvers**: Use specific DNS resolvers for lookupscolor-coded output
+- 🎯 **Custom Resolvers**: Use specific DNS resolvers for lookups
 - 🎨 **Color Output**: Easily distinguish IPs and hostnames with color-coded output
 - 🔧 **Configurable**: Adjust concurrency levels to match your requirements
-- 🌐 **Dual Interface**: Use either command-line or web interface based on your needs# Usage
+- 🌐 **Dual Interface**: Use either command-line or web interface based on your needs
 
-# CLI UsageRevit offers multiple ways to perform reverse DNS lookups on IP addresses:
+# CLI Usage
 
-Revit's command-line interface offers multiple ways to perform reverse DNS lookups on IP addresses:## Command-Line Options
+Revit's command-line interface offers multiple ways to perform reverse DNS lookups on IP addresses:
 
-## Command-Line Options| Flag        | Description                                                        | Example                    |
+## Command-Line Options
 
 | Flag        | Description                                                        | Example                    |
 |-------------|--------------------------------------------------------------------|----------------------------|
@@ -53,65 +52,62 @@ Revit's command-line interface offers multiple ways to perform reverse DNS looku
 | `-l`        | Provide the path to a file containing a list of IP addresses.      | `revit -l ip_list.txt`     |
 | `-c`        | Set the level of concurrency for DNS lookups (default: 10).        | `revit -c 20`              |
 | `-r`        | Specify resolvers for reverse DNS lookup.                          | `revit -r 8.8.8.8`         |
-|             | You can provide a single IP address or a path to a file.           | `revit -r resolvers.txt`   |## Examples
+|             | You can provide a single IP address or a path to a file.           | `revit -r resolvers.txt`   |
 
-# Web Interface### Look up a single IP address:
+# Web Interface
 
-Revit also provides a web interface built with Fiber, allowing you to perform reverse DNS lookups through your browser. -i "8.8.8.8"
+Revit also provides a web interface built with Fiber, allowing you to perform reverse DNS lookups through your browser.
 
 ## Starting the Web Server
-### Look up a list of IP addresses from a file:
 To start the web interface, use:
- -l ip_list.txt
 ```sh
 revit serve
-```### Use a specific DNS resolver:
+```
 
-By default, the web server runs on port 8080. You can access it at http://localhost:8080. -i "8.8.8.8" -r "1.1.1.1"
+By default, the web server runs on port 8080. You can access it at http://localhost:8080.
 
 ## Web Interface Features
-### Use multiple DNS resolvers from a file:
 - User-friendly form for inputting IP addresses
-- Bulk lookup capability -l ip_list.txt -r resolvers.txt
+- Bulk lookup capability
 - Interactive results display
 - Easy to use for those who prefer GUI over CLI
-### Increase concurrency for faster lookups:
+
 # Examples
- -l ip_list.txt -c 50
+
 ## CLI Examples
 
-### Look up a single IP address:### Pipe input from another command:
+### Look up a single IP address:
 ```sh
-revit -i "8.8.8.8""8.8.8.8" | revit
+revit -i "8.8.8.8"
 ```
 
-### Look up a list of IP addresses from a file:```sh
-```shp_list.txt | revit
+### Look up a list of IP addresses from a file:
+```sh
 revit -l ip_list.txt
 ```
-## Output Format
+
 ### Use a specific DNS resolver:
-```shThe output is formatted with colored text for better readability:
+```sh
 revit -i "8.8.8.8" -r "1.1.1.1"
-``````
-.8.8        [dns.google]
-### Use multiple DNS resolvers from a file:.one]
+```
+
+### Use multiple DNS resolvers from a file:
 ```sh
 revit -l ip_list.txt -r resolvers.txt
-```# Inspiration
-
-### Increase concurrency for faster lookups:**revit** was born out of curiosity and a desire to explore Golang. While there are existing tools like [hakrevdns](https://github.com/hakluke/hakrevdns) that perform similar tasks (and I have immense respect for them), I decided to create this utility as a personal project to further my understanding of Go and enhance my programming skills.
-```sh
-revit -l ip_list.txt -c 50The development of **revit** started as an exploration into concurrent programming and networking in Go. As I tinkered with the language's features and learned more about its capabilities, the utility began to take shape.
 ```
-# Contributing
-### Pipe input from another command:
-```shContributions are welcome! Feel free to submit pull requests or open issues if you have suggestions for improvements.
-echo "8.8.8.8" | revit
-```# License
 
-```shThis project is licensed under the MIT License - see the LICENSE file for details.
-cat ip_list.txt | revit```
+### Increase concurrency for faster lookups:
+```sh
+revit -l ip_list.txt -c 50
+```
+
+### Pipe input from another command:
+```sh
+echo "8.8.8.8" | revit
+```
+```sh
+cat ip_list.txt | revit
+```
 
 ## Output Format
 
@@ -131,6 +127,12 @@ Revit is built in Go using:
 - Color formatting for CLI output
 
 The application architecture separates core reverse DNS functionality from interface concerns, making it easy to extend and maintain.
+
+# Inspiration
+
+**revit** was born out of curiosity and a desire to explore Golang. While there are existing tools like [hakrevdns](https://github.com/hakluke/hakrevdns) that perform similar tasks (and I have immense respect for them), I decided to create this utility as a personal project to further my understanding of Go and enhance my programming skills.
+
+The development of **revit** started as an exploration into concurrent programming and networking in Go. As I tinkered with the language's features and learned more about its capabilities, the utility began to take shape.
 
 # Contributing
 
